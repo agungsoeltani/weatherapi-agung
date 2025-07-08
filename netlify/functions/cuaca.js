@@ -1,6 +1,6 @@
 export default async function handler(req, context) {
   const apiKey = process.env.OPENWEATHER_API_KEY;
-  const daftarKota = ['Jakarta', 'Bandung', 'Surabaya', 'Medan', 'Makassar', 'Denpasar'];
+  const daftarKota = ['Jakarta', 'Depok', 'Bandung', 'Surabaya', 'Medan', 'Makassar', 'Denpasar'];
 
   try {
     const requests = daftarKota.map(kota =>
