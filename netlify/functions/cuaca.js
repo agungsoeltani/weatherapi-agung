@@ -20,26 +20,25 @@ export default async function handler(req, context) {
       icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
     }));
 
-    // --- BAGIAN YANG DIUBAH (JAWABAN SUKSES) ---
-    // Kita membuat objek Response baru. Parameter pertama adalah body (harus string),
-    // parameter kedua adalah options (status dan headers).
     return new Response(JSON.stringify(dataCuaca), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 's-maxage=600, stale-while-revalidate'
+        'Cache-Control': 's-maxage=600, stale-while-revalidate',
+        // --- TAMBAHKAN BARIS INI ---
+        'Access-Control-Allow-Origin': '*' // Mengizinkan semua domain mengakses API ini
       }
     });
     
   } catch (error) {
     console.error(error);
     
-    // --- BAGIAN YANG DIUBAH (JAWABAN GAGAL) ---
-    // Buat objek Response juga untuk error.
     return new Response(JSON.stringify({ message: 'Terjadi kesalahan saat mengambil data cuaca', detail: error.message }), {
       status: 500,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        // --- TAMBAHKAN BARIS INI JUGA UNTUK ERROR ---
+        'Access-Control-Allow-Origin': '*'
       }
     });
   }
